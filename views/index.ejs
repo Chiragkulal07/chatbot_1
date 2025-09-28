@@ -3,21 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Interactive Navigation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f0f8ff, #e0ffff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            color: #333;
+            text-align: center;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 3px;
+            background-color: #6c63ff;
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s;
+            border-radius: 3px;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover p {
+            color: #6c63ff;
+            transform: scale(1.1);
+        }
+
+        nav p {
+            margin: 0;
+            padding: 10px 15px;
+            transition: transform 0.3s, color 0.3s;
+            font-weight: 600;
+        }
+
+        /* Hover background effect */
+        nav a:hover {
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 8px;
+            padding: 5px 10px;
+            transition: all 0.3s;
+        }
+
+        /* Responsive for small screens */
+        @media (max-width: 500px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>Hello, EJS!</h1>
-    
-      <nav style="display: flex; gap: 20px;">
-          <a href="/analysis" ><p>analysis</p></a>
-          <a href="/insights"><p>insights</p></a>
-          <a href="/methods"><p>methods</p></a>
-          
 
-
-
-      </nav>
-       
- 
+    <nav>
+        <a href="/analysis"><p>Analysis</p></a>
+        <a href="/insights"><p>Insights</p></a>
+        <a href="/methods"><p>Methods</p></a>
+    </nav>
 </body>
 </html>

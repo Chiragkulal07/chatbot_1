@@ -1,20 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Form</title>
+<style>
+/* General container */
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: linear-gradient(to bottom right, #a0eafc, #f8d7ff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-<div >
+/* Form styling */
+form {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
+form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Input styling */
+input[type="text"] {
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
+}
+
+/* Button styling */
+button {
+    padding: 12px;
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #574fd6;
+    transform: scale(1.05);
+}
+
+/* Link styling */
+a {
+    text-decoration: none;
+    color: #6c63ff;
+    margin-top: 15px;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #574fd6;
+}
+
+/* Output section */
+h2 {
+    margin-top: 30px;
+    color: #333;
+}
+
+p {
+    background: #f0f0f0;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    word-wrap: break-word;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+p:hover {
+    transform: scale(1.02);
+}
+
+/* Typing effect */
+.typing {
+    display: inline-block;
+    border-right: 2px solid #6c63ff;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { border-color: #6c63ff; }
+    25%, 75% { border-color: transparent; }
+}
+</style>
+</head>
+<body>
+<div>
  <form action="/analysis/get" method="POST">
     <input type="text" name="data" placeholder="Enter your question" required><br><br>
-    <button  type="submit">Submit</button>
-   </form>
-   <% if (data) { %>
+    <button type="submit">Submit</button>
+    <a href="/">Back to home</a>
+ </form>
+
+ <% if (data) { %>
     <h2>Your Input:</h2>
     <p><%= data %></p>
-    <% } %>
+ <% } %>
 
-    <% if (aiResponse) { %>
-        <h2> Response:</h2>
-        <p><%= aiResponse %></p>
-    <% } %>
+ <% if (aiResponse) { %>
+    <h2>Response:</h2>
+    <p id="response"></p>
+    <script>
+        // Typing animation for AI response
+        const text = `<%= aiResponse %>`;
+        const responseEl = document.getElementById('response');
+        let index = 0;
+        function type() {
+            if(index < text.length){
+                responseEl.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(type, 200); // typing speed
+            }
+        }
+        type();
+    </script>
+ <% } %>
 </div>
-
-
-
+</body>
+</html>
