@@ -1,5 +1,5 @@
 const express = require('express');
-const { OpenAI } = require('openai');
+
 
 const router = express.Router();
 const HF_TOKEN = process.env.HF_TOKEN;
